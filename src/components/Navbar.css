@@ -1,0 +1,25 @@
+.navbar {
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+  }
+  
+  .navbar li {
+    margin: 0 20px;
+  }
+  
+  .navbar li a {
+    color: gray;
+  }
+  .active-link a {
+    color: white !important;
+  }
+  
+  .active-link {
+    font-weight: bold;
+    text-decoration: underline;
+    text-decoration-color: blue;
+    text-decoration-thickness: 4px;
+    text-underline-offset: 8px;
+  }
+  

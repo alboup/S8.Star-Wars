@@ -22,6 +22,7 @@ type Starship = {
   const StarshipDetails: React.FC = () => {
     const { id } = useParams();
     const [starship, setStarship] = useState<Starship | null>(null);
+    const [imageFailed, setImageFailed] = useState(false);
   
     useEffect(() => {
       axios.get(`https://swapi.dev/api/starships/${id}/`)
@@ -30,25 +31,31 @@ type Starship = {
         })
         .catch(error => console.log(error));
     }, [id]);
-  
+
+    const handleImageError = () => {
+      setImageFailed(true);
+    };
+
     if (!starship) return <p>Loading...</p>;
-  
+
+    const imageUrl = imageFailed ? 'https://starwars-visualguide.com/assets/img/starships/15.jpg' : `https://starwars-visualguide.com/assets/img/starships/${id}.jpg`;
+
     return (
       <div>
-        <h2>{starship.name}</h2>
-        <p>Model: {starship.model}</p>
-        <p>Starship Class: {starship.starship_class}</p>
-        <p>Manufacturer: {starship.manufacturer}</p>
-        <p>Cost: {starship.cost_in_credits}</p>
-        <p>Crew: {starship.crew}</p>
-        <p>Passenger Capacity: {starship.passengers}</p>
-        <p>Cargo Capacity: {starship.cargo_capacity}</p>
-        <p>Consumables: {starship.consumables}</p>
-        <p>Length: {starship.length}</p>
-        <p>Maximum Atmosphering Speed: {starship.max_atmosphering_speed}</p>
-        <p>Hyperdrive Rating: {starship.hyperdrive_rating}</p>
-        <p>Maximum Speed in Realspace: {starship.MGLT}</p>
-        <img src={`https://starwars-visualguide.com/assets/img/starships/${id}.jpg`} alt={starship.name} />
+        <h1>{starship.name}</h1>
+        <img src={imageUrl} onError={handleImageError} alt={starship.name} />
+        <p><b>Model:</b> {starship.model}</p>
+        <p><b>Starship Class:</b> {starship.starship_class}</p>
+        <p><b>Manufacturer:</b> {starship.manufacturer}</p>
+        <p><b>Cost:</b> {starship.cost_in_credits}</p>
+        <p><b>Crew:</b> {starship.crew}</p>
+        <p><b>Passenger Capacity:</b> {starship.passengers}</p>
+        <p><b>Cargo Capacity:</b> {starship.cargo_capacity}</p>
+        <p><b>Consumables:</b> {starship.consumables}</p>
+        <p><b>Length:</b> {starship.length}</p>
+        <p><b>Maximum Atmosphering Speed:</b> {starship.max_atmosphering_speed}</p>
+        <p><b>Hyperdrive Rating:</b> {starship.hyperdrive_rating}</p>
+        <p><b>Maximum Speed in Realspace: </b>{starship.MGLT}</p>
       </div>
     );
   };

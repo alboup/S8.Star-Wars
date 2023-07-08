@@ -1,0 +1,24 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    
+  }
+
+  .logo{
+    height: 200px;
+    
+  }
+  
+  .empty-space, .logo-container, .auth-links {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .auth-links {
+    justify-content: flex-end;
+    gap: 20px;
+  }
+  
